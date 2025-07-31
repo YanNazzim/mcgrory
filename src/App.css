@@ -1,38 +1,223 @@
-.App {
-  text-align: center;
+/* --- Base & Fonts --- */
+:root {
+  --primary-color: #007BFF;
+  --primary-hover: #0056b3;
+  --background-dark: #121212;
+  --background-light: #1E1E1E;
+  --text-primary: #EAEAEA;
+  --text-secondary: #B0B0B0;
+  --accent-color: #BB86FC;
+  --accent-hover: #9e47f7;
+  --border-color: #2c2c2c;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  margin: 0;
+  background-color: var(--background-dark);
+  color: var(--text-primary);
+  font-family: 'Poppins', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* --- Main Presentation Container --- */
+.presentation-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.slides-wrapper {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  height: 100%;
+  transition: transform 0.7s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+.background-shapes {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+        radial-gradient(circle at 15% 15%, var(--primary-color) 2px, transparent 0),
+        radial-gradient(circle at 85% 75%, var(--accent-color) 2px, transparent 0);
+    background-size: 100px 100px;
+    opacity: 0.1;
+    animation: move-background 60s linear infinite;
+}
+
+@keyframes move-background {
+    from { background-position: 0 0; }
+    to { background-position: 1000px 500px; }
+}
+
+/* --- Slide Styling --- */
+.slide {
+  flex: 0 0 100vw;
+  height: 100vh;
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  padding: 5vw;
+  box-sizing: border-box;
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
 }
 
-.App-link {
-  color: #61dafb;
+.slide.active {
+  opacity: 1;
+  transform: scale(1);
 }
 
-@keyframes App-logo-spin {
+.slide-content {
+  background-color: var(--background-light);
+  padding: 40px 50px;
+  border-radius: 15px;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+  max-width: 1000px;
+  width: 100%;
+  text-align: left;
+  transform-style: preserve-3d;
+}
+
+/* Animate content on active slide */
+.slide.active .slide-title,
+.slide.active .main-title,
+.slide.active p,
+.slide.active ul,
+.slide.active .feature-grid,
+.slide.active .tables-container,
+.slide.active .conclusion-points,
+.slide.active .final-commitment,
+.slide.active .thank-you {
+    animation: fadeIn-Up 0.6s ease-out forwards;
+}
+
+.slide.active p, .slide.active li { animation-delay: 0.2s; }
+.slide.active .feature-grid, .slide.active .agenda-list { animation-delay: 0.3s; }
+
+@keyframes fadeIn-Up {
   from {
-    transform: rotate(0deg);
+    opacity: 0;
+    transform: translateY(20px);
   }
   to {
-    transform: rotate(360deg);
+    opacity: 1;
+    transform: translateY(0);
   }
+}
+
+/* --- Typography & Text Elements --- */
+.slide-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--border-color);
+}
+
+p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+
+strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+/* Title Slide Specifics */
+.title-slide { text-align: center; }
+.main-title { font-size: 3.5rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.5rem; }
+.subtitle { font-size: 1.5rem; color: var(--primary-color); margin-bottom: 2rem; }
+.presenter-info p { color: var(--text-secondary); margin-bottom: 0.2rem; }
+
+
+/* Agenda Slide */
+.agenda-intro { margin-top: 2rem; font-weight: 600; color: var(--text-primary); }
+.agenda-list { list-style: none; padding-left: 0; }
+.agenda-list li { display: flex; align-items: start; margin-bottom: 1rem; }
+.emoji-bullet { font-size: 1.5rem; margin-right: 15px; line-height: 1.2; }
+
+
+/* Feature Grid (for Production/Special Orders slides) */
+.feature-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 2rem; }
+.feature-card { background: var(--background-dark); padding: 20px; border-radius: 10px; border: 1px solid var(--border-color); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+.feature-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
+.feature-card h3 { font-size: 1.2rem; margin: 0 0 10px 0; color: var(--accent-color); }
+.feature-card p { font-size: 0.95rem; margin-bottom: 0; }
+
+/* Parts Table */
+.tables-container { display: flex; gap: 30px; margin-top: 1.5rem; }
+.parts-table-container { flex: 1; }
+.parts-table-caption { font-size: 1.2rem; font-weight: 600; text-align: center; color: var(--text-primary); margin-bottom: 1rem; }
+
+/* Conclusion Slide */
+.summary-statement { font-style: italic; color: var(--text-secondary); }
+.conclusion-points { margin: 2rem 0; }
+.conclusion-points p { display: flex; align-items: center; font-size: 1.2rem; font-weight: 600; color: var(--text-primary); }
+.conclusion-points span { font-size: 1.5rem; margin-right: 15px; }
+.final-commitment { background-color: rgba(0, 123, 255, 0.1); border-left: 4px solid var(--primary-color); padding: 15px; border-radius: 4px; font-weight: 600; color: var(--text-primary); }
+.thank-you { font-size: 2rem; text-align: center; margin-top: 2rem; font-weight: 700; color: var(--accent-color); }
+
+
+/* --- Navigation & Footer --- */
+.nav-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+  font-size: 1.5rem;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.nav-arrow:hover {
+  background: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+}
+
+.nav-arrow.prev { left: 20px; }
+.nav-arrow.next { right: 20px; }
+
+.presentation-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  color: var(--text-secondary);
+}
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 30px;
+  font-size: 0.9rem;
+}
+.progress-bar-container {
+  width: 100%;
+  height: 4px;
+  background-color: var(--border-color);
+}
+.progress-bar {
+  height: 100%;
+  background-color: var(--primary-color);
+  transition: width 0.4s ease-out;
 }
