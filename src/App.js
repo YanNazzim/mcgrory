@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
+import logo from './images/sargentXmcgrory.png'; // Make sure this path is correct
 
 // Reusable Slide Component
 const Slide = ({ children, isActive }) => (
@@ -43,7 +44,7 @@ export default function App() {
     const [activeSlide, setActiveSlide] = useState(0);
 
     const slides = [
-        'intro', 'agenda', 'production', 'special-orders', 'parts', 'conclusion'
+        'intro', 'agenda', 'production', 'parts', 'conclusion'
     ];
     
     const totalSlides = slides.length;
@@ -112,6 +113,7 @@ export default function App() {
                 {/* --- Title Slide --- */}
                 <Slide isActive={activeSlide === 0}>
                     <div className="title-slide">
+                        <img src={logo} alt="Sargent and McGrory Glass Logo" className="presentation-logo" />
                         <h1 className="main-title">A Partnership in Precision</h1>
                         <p className="subtitle">Sargent Manufacturing & McGrory Glass</p>
                         <div className="presenter-info">
@@ -126,55 +128,45 @@ export default function App() {
                     <h2 className="slide-title">Introduction & Agenda</h2>
                     <p className="agenda-intro">We'll cover three main areas:</p>
                     <ul className="agenda-list">
-                        <li><span className="emoji-bullet">🎯</span> <strong>Our Custom Production Approach:</strong> What our manufacturing floor is doing differently for your order.</li>
-                        <li><span className="emoji-bullet">👥</span> <strong>Our Enhanced Special Orders Process:</strong> How our internal teams are coordinating to manage every detail.</li>
-                        <li><span className="emoji-bullet">✅</span> <strong>A Detailed Parts Verification:</strong> A complete recap of the components for each door type.</li>
+                        <li><span className="emoji-bullet">🎯</span> <strong>Our Custom Production Approach:</strong> How we've tailored our process for your specific needs.</li>
+                        <li><span className="emoji-bullet">✅</span> <strong>A Detailed Parts Verification:</strong> A visual confirmation of all components for your application.</li>
+                        <li><span className="emoji-bullet">🤝</span> <strong>Our Commitment to Partnership:</strong> Our plan for long-term support and success.</li>
                     </ul>
                 </Slide>
                 
-                {/* --- Production Slide --- */}
+                {/* --- Point 1 Slide (REVISED) --- */}
                 <Slide isActive={activeSlide === 2}>
-                    <h2 className="slide-title">Point 1: Production Enhancements</h2>
-                    <p>"To eliminate any chance of error with your non-standard requirements, we've moved this order out of our standard workflow and into a specialized process."</p>
+                    <h2 className="slide-title">Point 1: A Process Built for Precision</h2>
+                     <p>"We've implemented a multi-faceted approach to ensure your order is handled with the highest degree of accuracy, from initial request to final assembly."</p>
                     <div className="feature-grid">
-                        <div className="feature-card"><h3>Dedicated Production Cell</h3><p>Staffed by senior technicians briefed on the specific requirements of the 2-9/16" door thickness and trim offset.</p></div>
-                        <div className="feature-card"><h3>'McGrory Glass' Order Tagging</h3><p>Every component is physically tagged to prevent any part from being accidentally swapped with standard inventory.</p></div>
-                        <div className="feature-card"><h3>Pre-Production Kitting</h3><p>All components for a single device are gathered and verified in a 'kit' before assembly, including specific thru-bolts and spindles.</p></div>
-                        <div className="feature-card"><h3>Heightened Quality Control</h3><p>Two additional QC checkpoints: a dimensional check using a custom jig, and a final pre-packaging verification.</p></div>
-                    </div>
-                </Slide>
-
-                {/* --- Special Orders Slide --- */}
-                <Slide isActive={activeSlide === 3}>
-                    <h2 className="slide-title">Point 2: Special Orders & Engineering</h2>
-                     <p>"Behind the scenes, our Special Orders and Engineering teams are providing an extra layer of oversight. Atypical door thicknesses require meticulous coordination."</p>
-                    <div className="feature-grid">
-                        <div className="feature-card"><h3>Dedicated Order Coordinator</h3><p>I am personally serving as the single point of contact and coordinator for this order, from engineering to shipment.</p></div>
-                        <div className="feature-card"><h3>Custom Bill of Materials (BOM)</h3><p>Our engineers generated two distinct BOMs to ensure the correct parts are pulled and to explicitly address the trim offset.</p></div>
-                        <div className="feature-card"><h3>Pre-Production Kickoff Meeting</h3><p>A formal meeting with leads from Engineering, Production, and QA to review your blueprints and ensure total alignment.</p></div>
-                        <div className="feature-card"><h3>Proactive Communication</h3><p>We will provide progress updates and can share QC photos prior to shipping for a final layer of assurance.</p></div>
+                        <div className="feature-card"><h3>Special Order Tagging</h3><p>Your orders are specially marked to differentiate them from standard production, ensuring they receive the specialized handling they require.</p></div>
+                        <div className="feature-card"><h3>Detailed SPAR Forms</h3><p>We created a detailed Special Product Application Request (SPAR) which auto-attaches a verified parts list to every order, removing ambiguity.</p></div>
+                        <div className="feature-card"><h3>Visual Parts Guide</h3><p>We've prepared a detailed parts list with pictures, so we're all on the same page about exactly what components work for the McGrory application.</p></div>
+                        <div className="feature-card"><h3>Future-Proof System</h3><p>Our SPAR system ensures that any future changes to the door or product specs can be updated permanently, guaranteeing long-term accuracy.</p></div>
                     </div>
                 </Slide>
 
                 {/* --- Parts Verification Slide --- */}
-                <Slide isActive={activeSlide === 4}>
-                     <h2 className="slide-title">Point 3: Parts Recap & Verification</h2>
-                     <p>"Now, I'd like to review the specific parts lists. The goal here is transparency and joint verification. Please stop me if you have any questions."</p>
+                <Slide isActive={activeSlide === 3}>
+                     <h2 className="slide-title">Point 2: Parts Recap & Verification</h2>
+                     <p>"Now, let's visually review the specific parts lists. The goal here is transparency and joint verification."</p>
                      <div className="tables-container">
                         <PartsTable parts={partsFor2_9_16} caption="For 2-9/16&quot; Thick Doors" />
                         <PartsTable parts={partsFor2inch} caption="For 2&quot; Thick Doors w/ 2-9/16&quot; Offset" />
                      </div>
                 </Slide>
 
-                {/* --- Conclusion Slide --- */}
-                <Slide isActive={activeSlide === 5}>
-                    <h2 className="slide-title">Our Commitment</h2>
-                    <p className="summary-statement">"To summarize, we have built a custom, multi-layered process around your order to ensure both physical precision and administrative accuracy."</p>
-                     <div className="conclusion-points">
-                        <p><span>🎯</span> <strong>On the floor,</strong> we're using dedicated cells and tagging.</p>
-                        <p><span>👥</span> <strong>Behind the scenes,</strong> we have dedicated coordination and custom BOMs.</p>
-                     </div>
-                    <p className="final-commitment">"Our goal is to be more than a supplier; we aim to be a genuine partner. We are confident that the steps we've taken will result in a product that installs smoothly and performs flawlessly for your unique application."</p>
+                {/* --- Conclusion Slide (REVISED) --- */}
+                <Slide isActive={activeSlide === 4}>
+                    <h2 className="slide-title">Point 3: Our Commitment & Partnership</h2>
+                    <p className="summary-statement">"We've built a custom, multi-layered process around your order to ensure both physical precision and administrative accuracy, but our support doesn't end there."</p>
+                    <div className="conclusion-points">
+                        <p><span>🎯</span> <strong>A Process You Can Trust:</strong> From special tagging to automated SPARs, we ensure your order is right, every time.</p>
+                        <p><span>✅</span> <strong>Total Clarity:</strong> With visual parts guides and detailed BOMs, you know exactly what you're getting.</p>
+                    </div>
+                    <p className="final-commitment">
+                        <strong>My commitment to you is straightforward:</strong> At the end of the day, we're partners. While we aim for perfection, I am truly committed to helping resolve any issues that may arise. Your success is our success.
+                    </p>
                     <p className="thank-you">Thank you.</p>
                 </Slide>
             </div>
