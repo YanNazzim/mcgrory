@@ -296,8 +296,8 @@ strong {
 .modal-close {
   position: absolute;
   /* Position it relative to the container */
-  top: 20%;
-  right: -40%;
+  top: 0;
+  right: 0;
   /* Transform it to align with the rotated corner */
   transform: translate(50%, -50%);
   background: var(--background-dark);
@@ -339,6 +339,7 @@ strong {
     align-items: center;
     justify-content: center;
     gap: 25px; /* Increased gap */
+    margin-top: 2rem;
 }
 
 .work-order-thumbnail {
@@ -349,6 +350,7 @@ strong {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     border: 2px solid var(--border-color);
     transform: rotate(90deg);
+    margin-top: 20px;
 }
 
 .work-order-thumbnail:hover {
@@ -357,7 +359,6 @@ strong {
 }
 
 .pdf-link {
-  margin-top: -15%;
     color: var(--accent-color);
     text-decoration: none;
     font-weight: 600;
@@ -371,4 +372,69 @@ strong {
 .pdf-link:hover {
     background-color: var(--accent-color);
     color: var(--background-dark);
+}
+
+
+/* --- ✅ RESPONSIVE STYLES --- */
+@media (max-width: 768px) {
+    .slide-content {
+        padding: 30px 25px;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+
+    .main-title {
+        font-size: 2.5rem;
+    }
+
+    .subtitle {
+        font-size: 1.2rem;
+    }
+
+    .slide-title {
+        font-size: 1.8rem;
+    }
+
+    p {
+        font-size: 1rem;
+    }
+
+    .feature-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .agenda-list li, .conclusion-point-item {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .emoji-bullet, .conclusion-point-item span {
+        font-size: 1.2rem;
+        margin-right: 15px;
+    }
+    
+    .nav-arrow {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+
+    .nav-arrow.prev { left: 10px; }
+    .nav-arrow.next { right: 10px; }
+
+    .work-order-thumbnail {
+        width: 280px;
+        margin-top: 10px;
+    }
+
+    .pdf-link {
+        font-size: 1rem;
+        padding: 10px 15px;
+    }
+
+    .footer-content {
+        padding: 10px 15px;
+        font-size: 0.8rem;
+    }
 }
