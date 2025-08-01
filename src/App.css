@@ -99,7 +99,7 @@ body {
     animation: fadeIn-Up 0.6s ease-out forwards;
 }
 
-.slide.active .main-title { animation-delay: 0.1s; } 
+.slide.active .main-title { animation-delay: 0.1s; }
 .slide.active p, .slide.active li { animation-delay: 0.2s; }
 .slide.active .feature-grid, .slide.active .agenda-list, .slide.active .conclusion-points { animation-delay: 0.3s; }
 
@@ -139,10 +139,10 @@ strong {
 /* Title Slide Specifics */
 .title-slide { text-align: center; }
 .presentation-logo {
-    max-width: 300px; 
+    max-width: 300px;
     height: auto;
-    margin: 0 auto 2rem auto; 
-    border-radius: 25px; 
+    margin: 0 auto 2rem auto;
+    border-radius: 25px;
     display: block;
 }
 .main-title { font-size: 3.5rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.5rem; }
@@ -151,26 +151,26 @@ strong {
 
 
 /* --- UPDATED Agenda Slide --- */
-.agenda-intro { 
-  margin-top: 2rem; 
-  font-weight: 600; 
-  color: var(--text-primary); 
+.agenda-intro {
+  margin-top: 2rem;
+  font-weight: 600;
+  color: var(--text-primary);
   font-size: 1.2rem;
 }
-.agenda-list { 
-  list-style: none; 
-  padding-left: 0; 
+.agenda-list {
+  list-style: none;
+  padding-left: 0;
   margin-top: 1.5rem;
 }
-.agenda-list li { 
-  display: flex; 
+.agenda-list li {
+  display: flex;
   align-items: flex-start; /* Aligns items to the top */
   margin-bottom: 1.8rem; /* Increased spacing */
   font-size: 1.1rem;
   line-height: 1.6; /* Improved line height */
 }
-.emoji-bullet { 
-  font-size: 1.5rem; 
+.emoji-bullet {
+  font-size: 1.5rem;
   margin-right: 20px; /* Increased space */
   margin-top: -2px; /* Fine-tune vertical alignment */
   color: var(--accent-color);
@@ -192,8 +192,8 @@ strong {
 
 /* --- UPDATED Conclusion Slide --- */
 .summary-statement { font-style: italic; color: var(--text-secondary); text-align: center; margin-bottom: 2.5rem; }
-.conclusion-points { 
-  margin: 2.5rem 0; 
+.conclusion-points {
+  margin: 2.5rem 0;
 }
 .conclusion-point-item {
   display: flex;
@@ -205,7 +205,7 @@ strong {
   margin-bottom: 1.8rem; /* Increased spacing */
 }
 .conclusion-point-item span { /* Targets the emoji */
-  font-size: 1.5rem; 
+  font-size: 1.5rem;
   margin-right: 20px; /* Increased spacing */
   margin-top: -2px;
   color: var(--primary-color);
@@ -268,14 +268,14 @@ strong {
   transition: width 0.4s ease-out;
 }
 
-/* --- Modal Styles --- */
+/* --- FINAL Modal Styles --- */
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.85); /* Darker overlay */
+  background-color: rgba(0, 0, 0, 0.85);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -285,35 +285,51 @@ strong {
 
 .modal-content {
   position: relative;
-  background: var(--background-light);
-  padding: 15px;
-  border-radius: 10px;
-  max-width: 90vw;
-  max-height: 90vh;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  display: inline-block;
+  padding: 0;
+  background: none;
+  box-shadow: none;
+  /* Add line-height 0 to fix extra space under the image */
+  line-height: 0;
 }
 
 .modal-close {
   position: absolute;
-  top: 10px;
-  right: 15px;
-  background: none;
-  border: none;
-  font-size: 2.5rem;
+  /* Position it relative to the container */
+  top: 20%;
+  right: -40%;
+  /* Transform it to align with the rotated corner */
+  transform: translate(50%, -50%);
+  background: var(--background-dark);
+  border: 2px solid var(--border-color);
   color: var(--text-secondary);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 1.8rem;
   cursor: pointer;
-  line-height: 1;
+  line-height: 38px;
+  text-align: center;
+  z-index: 1010;
+  transition: all 0.3s ease;
 }
 
 .modal-close:hover {
-    color: var(--text-primary);
+    background: var(--primary-color);
+    color: white;
+    transform: translate(50%, -50%) rotate(90deg);
 }
 
 .modal-image {
   display: block;
-  max-width: 100%;
-  max-height: calc(90vh - 30px); /* Adjust for padding */
-  border-radius: 5px;
+  max-width: 80vh;
+  max-height: 80vw;
+  border-radius: 10px;
+  background: var(--background-light);
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  transform: rotate(90deg);
 }
 
 /* --- Parts Verification Slide Content --- */
@@ -323,29 +339,30 @@ strong {
     align-items: center;
     justify-content: center;
     gap: 25px; /* Increased gap */
-    margin-top: 2rem;
 }
 
 .work-order-thumbnail {
-    width: 250px; /* Made image slightly larger */
+    width: 350px;
     height: auto;
     border-radius: 8px;
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     border: 2px solid var(--border-color);
+    transform: rotate(90deg);
 }
 
 .work-order-thumbnail:hover {
-    transform: scale(1.05);
+    transform: scale(1.05) rotate(90deg); /* Keep rotation on hover */
     box-shadow: 0 5px 20px rgba(0,0,0,0.4);
 }
 
 .pdf-link {
+  margin-top: -15%;
     color: var(--accent-color);
     text-decoration: none;
     font-weight: 600;
     font-size: 1.1rem;
-    padding: 12px 20px; /* Increased padding */
+    padding: 12px 20px;
     border: 1px solid var(--accent-color);
     border-radius: 5px;
     transition: background-color 0.3s, color 0.3s;
