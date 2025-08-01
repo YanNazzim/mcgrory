@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import logo from './images/sargentXmcgrory.png'; // Make sure this path is correct
+import workOrderImage from './images/workorder.jpg'; // Add your work order image here
+import mcgroryPdf from './Mcgrory.pdf'; // Import the PDF
 
 // Reusable Slide Component
 const Slide = ({ children, isActive }) => (
@@ -11,37 +13,28 @@ const Slide = ({ children, isActive }) => (
     </div>
 );
 
-// Parts Table Component
-const PartsTable = ({ parts, caption }) => (
-    <div className="parts-table-container">
-        <p className="parts-table-caption">{caption}</p>
-        <div className="overflow-x-auto rounded-lg border border-gray-700">
-            <table className="min-w-full divide-y divide-gray-700">
-                <thead className="bg-gray-800">
-                    <tr>
-                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Component</th>
-                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Part Number</th>
-                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Notes / Special Consideration</th>
-                    </tr>
-                </thead>
-                <tbody className="bg-gray-900 divide-y divide-gray-700">
-                    {parts.map((part, index) => (
-                        <tr key={index} className="hover:bg-gray-700">
-                            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-200">{part.component}</td>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-400 font-mono">{part.partNumber}</td>
-                            <td className="px-6 py-4 whitespace-normal text-sm text-gray-300" dangerouslySetInnerHTML={{ __html: part.notes }}></td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+// Modal Component
+const Modal = ({ isOpen, onClose, children }) => {
+    if (!isOpen) return null;
+
+    return (
+        <div className="modal-overlay" onClick={onClose}>
+            <div className="modal-content" onClick={e => e.stopPropagation()}>
+                <button className="modal-close" onClick={onClose}>&times;</button>
+                {children}
+            </div>
         </div>
-    </div>
-);
+    );
+};
 
 
 export default function App() {
     const [currentDate, setCurrentDate] = useState('');
     const [activeSlide, setActiveSlide] = useState(0);
+    const [isModalOpen, setModalOpen] = useState(false);
+
+    const toggleModal = () => setModalOpen(!isModalOpen);
+
 
     const slides = [
         'intro', 'agenda', 'production', 'parts', 'conclusion'
@@ -76,32 +69,6 @@ export default function App() {
             window.removeEventListener('keydown', handleKeyDown);
         };
     }, [nextSlide, prevSlide]);
-
-    const partsFor2_9_16 = [
-        { component: 'Exit Device Chassis', partNumber: '[Part #]', notes: 'Standard chassis.' },
-        { component: 'Trim / Lever Assembly', partNumber: '[Part #]', notes: 'Standard trim.' },
-        { component: 'Spindle', partNumber: '[Part #]', notes: '<strong>Special length for 2-9/16" door thickness.</strong>' },
-        { component: 'Mounting Thru-Bolts', partNumber: '[Part #]', notes: '<strong>Special length for 2-9/16" door thickness.</strong>' },
-        { component: 'Cylinder Collar/Ring', partNumber: '[Part #]', notes: '<strong>Sized to accommodate the extra door thickness.</strong>' },
-        { component: 'Tailpiece', partNumber: '[Part #]', notes: 'Cut/sized for specific cylinder and thickness requirements.' },
-        { component: 'End Cap & Mounting', partNumber: '[Part #]', notes: 'Standard component.' },
-        { component: 'Strike Plate', partNumber: '[Part #]', notes: 'As specified for your frame.' },
-        { component: 'Fastener Pack', partNumber: '[Part #]', notes: 'Includes all necessary screws for device and strike.' },
-    ];
-
-    const partsFor2inch = [
-        { component: 'Exit Device Chassis', partNumber: '[Part #]', notes: 'Standard chassis.' },
-        { component: 'Trim / Lever Assembly', partNumber: '[Part #]', notes: 'Standard trim.' },
-        { component: 'Spindle', partNumber: '[Part #]', notes: '<strong>Identical to 2-9/16" door to accommodate trim offset.</strong>' },
-        { component: 'Mounting Thru-Bolts', partNumber: '[Part #]', notes: '<strong>Identical to 2-9/16" door to accommodate trim offset.</strong>' },
-        { component: 'Cylinder Collar/Ring', partNumber: '[Part #]', notes: '<strong>Identical to 2-9/16" door to accommodate trim offset.</strong>' },
-        { component: 'Tailpiece', partNumber: '[Part #]', notes: 'Cut/sized for specific cylinder and thickness requirements.' },
-        { component: 'End Cap & Mounting', partNumber: '[Part #]', notes: 'Standard component.' },
-        { component: 'Strike Plate', partNumber: '[Part #]', notes: 'As specified for your frame.' },
-        { component: 'Fastener Pack', partNumber: '[Part #]', notes: 'Includes all necessary screws for device and strike.' },
-        { component: 'Custom Shim/Block (if req\'d)', partNumber: '[Part # or N/A]', notes: '<em>To be discussed: Is a shim needed on the device side?</em>' },
-    ];
-
 
     return (
         <div className="presentation-container">
@@ -150,9 +117,21 @@ export default function App() {
                 <Slide isActive={activeSlide === 3}>
                      <h2 className="slide-title">Point 2: Parts Recap & Verification</h2>
                      <p>"Now, let's visually review the specific parts lists. The goal here is transparency and joint verification."</p>
-                     <div className="tables-container">
-                        <PartsTable parts={partsFor2_9_16} caption="For 2-9/16&quot; Thick Doors" />
-                        <PartsTable parts={partsFor2inch} caption="For 2&quot; Thick Doors w/ 2-9/16&quot; Offset" />
+                     <div className="parts-verification-content">
+                        <img 
+                            src={workOrderImage} 
+                            alt="Work Order" 
+                            className="work-order-thumbnail"
+                            onClick={toggleModal}
+                        />
+                        <a 
+                            href={mcgroryPdf}
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            className="pdf-link"
+                        >
+                            Open SPAR Pictures PDF
+                        </a>
                      </div>
                 </Slide>
 
@@ -165,7 +144,7 @@ export default function App() {
                         <p><span>✅</span> <strong>Total Clarity:</strong> With visual parts guides and detailed BOMs, you know exactly what you're getting.</p>
                     </div>
                     <p className="final-commitment">
-                        <strong>My commitment to you is straightforward:</strong> At the end of the day, we're partners. While we aim for perfection, I am truly committed to helping resolve any issues that may arise. Your success is our success.
+                        <strong>Our commitment to you is straightforward:</strong> At the end of the day, we're partners. While we aim for perfection, I am truly committed to helping resolve any issues that may arise. Your success is our success.
                     </p>
                     <p className="thank-you">Thank you.</p>
                 </Slide>
@@ -185,6 +164,10 @@ export default function App() {
                     <div className="progress-bar" style={{ width: `${((activeSlide + 1) / totalSlides) * 100}%` }}></div>
                 </div>
             </footer>
+             {/* --- Modal --- */}
+             <Modal isOpen={isModalOpen} onClose={toggleModal}>
+                <img src={workOrderImage} alt="Enlarged Work Order" className="modal-image" />
+            </Modal>
         </div>
     );
 }
