@@ -162,17 +162,35 @@ strong {
   padding-left: 0;
   margin-top: 1.5rem;
 }
+
 .agenda-list li {
-  display: flex;
-  align-items: flex-start; /* Aligns items to the top */
-  margin-bottom: 1.8rem; /* Increased spacing */
-  font-size: 1.1rem;
-  line-height: 1.6; /* Improved line height */
+  margin-bottom: 1.8rem;
 }
+
+.agenda-point {
+    display: flex;
+    align-items: flex-start;
+}
+
+.agenda-point strong {
+    font-size: 1.2rem;
+    color: var(--text-primary);
+    font-weight: 700;
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+.sub-point {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin: 0;
+    padding-left: 0.1rem;
+}
+
 .emoji-bullet {
   font-size: 1.5rem;
-  margin-right: 20px; /* Increased space */
-  margin-top: -2px; /* Fine-tune vertical alignment */
+  margin-right: 20px;
+  margin-top: 5px;
   color: var(--accent-color);
 }
 

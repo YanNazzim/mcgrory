@@ -82,7 +82,6 @@ export default function App() {
                     <div className="title-slide">
                         <img src={logo} alt="Sargent and McGrory Glass Logo" className="presentation-logo" />
                         <h1 className="main-title">A Partnership in Precision</h1>
-                        <p className="subtitle">Sargent Manufacturing & McGrory Glass</p>
                         <div className="presenter-info">
                             <p>Presented by: Yan Gonzalez, Sargent Manufacturing</p>
                             <p>{currentDate}</p>
@@ -95,16 +94,39 @@ export default function App() {
                     <h2 className="slide-title">Introduction & Agenda</h2>
                     <p className="agenda-intro">We'll cover three main areas:</p>
                     <ul className="agenda-list">
-                        <li><span className="emoji-bullet">🎯</span> <strong>Our Custom Production Approach:</strong> How we've tailored our process for your specific needs.</li>
-                        <li><span className="emoji-bullet">✅</span> <strong>A Detailed Parts Verification:</strong> A visual confirmation of all components for your application.</li>
-                        <li><span className="emoji-bullet">🤝</span> <strong>Our Commitment to Partnership:</strong> Our plan for long-term support and success.</li>
+                        <li>
+                            <div className="agenda-point">
+                                <span className="emoji-bullet">🎯</span>
+                                <div>
+                                    <strong>Our Custom Production Approach</strong>
+                                    <p className="sub-point">How we've tailored our process for your specific needs.</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div className="agenda-point">
+                                <span className="emoji-bullet">✅</span>
+                                <div>
+                                    <strong>A Detailed Parts Verification</strong>
+                                    <p className="sub-point">A visual confirmation of all components for your application.</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div className="agenda-point">
+                                <span className="emoji-bullet">🤝</span>
+                                <div>
+                                    <strong>Our Commitment to Partnership</strong>
+                                    <p className="sub-point">Our plan for long-term support and success.</p>
+                                </div>
+                            </div>
+                        </li>
                     </ul>
                 </Slide>
                 
                 {/* --- Point 1 Slide (REVISED) --- */}
                 <Slide isActive={activeSlide === 2}>
                     <h2 className="slide-title">Point 1: A Process Built for Precision</h2>
-                     <p>"We've implemented a multi-faceted approach to ensure your order is handled with the highest degree of accuracy, from initial request to final assembly."</p>
                     <div className="feature-grid">
                         <div className="feature-card"><h3>Special Order Tagging</h3><p>Your orders are specially marked to differentiate them from standard production, ensuring they receive the specialized handling they require.</p></div>
                         <div className="feature-card"><h3>Detailed SPAR Forms</h3><p>We created a detailed Special Product Application Request (SPAR) which auto-attaches a verified parts list to every order, removing ambiguity.</p></div>
@@ -116,7 +138,6 @@ export default function App() {
                 {/* --- Parts Verification Slide --- */}
                 <Slide isActive={activeSlide === 3}>
                      <h2 className="slide-title">Point 2: Parts Recap & Verification</h2>
-                     <p>"Now, let's visually review the specific parts lists. The goal here is transparency and joint verification."</p>
                      <div className="parts-verification-content">
                         <img 
                             src={workOrderImage} 
@@ -138,7 +159,6 @@ export default function App() {
                 {/* --- Conclusion Slide (REVISED) --- */}
                 <Slide isActive={activeSlide === 4}>
                     <h2 className="slide-title">Point 3: Our Commitment & Partnership</h2>
-                    <p className="summary-statement">"We've built a custom, multi-layered process around your order to ensure both physical precision and administrative accuracy, but our support doesn't end there."</p>
                     <div className="conclusion-points">
                         <p><span>🎯</span> <strong>A Process You Can Trust:</strong> From special tagging to automated SPARs, we ensure your order is right, every time.</p>
                         <p><span>✅</span> <strong>Total Clarity:</strong> With visual parts guides and detailed BOMs, you know exactly what you're getting.</p>
